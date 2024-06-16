@@ -4,6 +4,18 @@
     <title>AR.js Video Example</title>
     <script src="js/aframe.min.js"></script>
     <script src="js/ar.min.js"></script>
+    <style>
+      #ig-link {
+        display: none;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+      }
+      #ig-icon {
+        width: 50px;
+        height: 50px;
+      }
+    </style>
   </head>
   <body style="margin: 0; overflow: hidden">
     <a-scene embedded arjs="sourceType: webcam;">
@@ -15,11 +27,6 @@
           loop
           crossorigin="anonymous"
         ></video>
-        <img
-          id="ig"
-          src="assets/logo/instagram.png"
-          alt="インスタグラムのロゴ"
-        />
       </a-assets>
       <a-marker type="pattern" url="assets/marker/pattern-sample.patt">
         <a-video
@@ -29,23 +36,32 @@
           width="4"
           height="2.25"
         ></a-video>
-        <a-image src="#ig" position="0 0 -1" width="1" height="1"> </a-image>
       </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
+    <a id="ig-link" href="instagram.com" target="_blank">
+      <img
+        id="ig-icon"
+        src="assets/logo/instagram.png"
+        alt="インスタグラムのロゴ"
+      />
+    </a>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         var video = document.querySelector("#video1");
         var marker = document.querySelector("a-marker");
+        var igLink = document.querySelector("#ig-link");
 
         marker.addEventListener("markerFound", function () {
           video.play().catch(function (error) {
             console.log("Error attempting to play video:", error);
           });
+          instagramLink.style.display = "block";
         });
 
         marker.addEventListener("markerLost", function () {
           video.pause();
+          instagramLink.style.display = "none";
         });
       });
     </script>
