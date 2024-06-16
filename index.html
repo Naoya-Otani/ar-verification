@@ -14,7 +14,6 @@
           preload="auto"
           loop
           crossorigin="anonymous"
-          autoplay
         ></video>
       </a-assets>
       <a-marker type="pattern" url="assets/marker/pattern-sample.patt">
@@ -28,5 +27,21 @@
       </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var video = document.querySelector("#video1");
+        var marker = document.querySelector("a-marker");
+
+        marker.addEventListener("markerFound", function () {
+          video.play().catch(function (error) {
+            console.log("Error attempting to play video:", error);
+          });
+        });
+
+        marker.addEventListener("markerLost", function () {
+          video.pause();
+        });
+      });
+    </script>
   </body>
 </html>
