@@ -14,12 +14,13 @@
         <a-image
           src="#ig"
           alt="instagram logo"
-          position="0 0.5 0"
+          position="0 1 0"
           height="1"
           width="1"
+          navigate="url: https://www.instagram.com/"
         />
       </a-marker>
-      <a-entity camera></a-entity>
+      <a-entity camera="" cursor="rayOrigin: mouse"></a-entity>
     </a-scene>
 
     <script>
@@ -38,9 +39,19 @@
           video.pause();
         });
       });
+      AFRAME.registerComponent("navigate", {
+        schema: {
+          url: { default: "" },
+        },
 
-      ig.addEventListener("click", function () {
-        window.open("https://example.com", "_blank");
+        init: function () {
+          var data = this.data;
+          var el = this.el;
+
+          el.addEventListener("click", function () {
+            window.location.href = data.url;
+          });
+        },
       });
     </script>
   </body>
