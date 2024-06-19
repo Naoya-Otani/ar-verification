@@ -19,49 +19,45 @@
   </head>
   <body style="margin: 0; overflow: hidden; position: relative">
     <a-scene embedded arjs="sourceType: webcam;">
-      <a-assets>
-        <video
-          id="video1"
-          src="assets/video/sample.mp4"
-          preload="auto"
-          loop
-          crossorigin="anonymous"
-        ></video>
-      </a-assets>
       <a-marker type="pattern" url="assets/marker/pattern-sample.patt">
-        <a-video
-          src="#video1"
-          position="0 0 0"
-          rotation="-90 0 0"
-          width="4"
-          height="2.25"
-        ></a-video>
+        <a-image
+          src="/assets/logo/instagram.png"
+          alt="instagram logo"
+          position="0 0.5 0"
+          height="1"
+          width="1"
+          link="url: https://example.com;"
+        />
       </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
-    <a id="ig-link" href="instagram.com" target="_blank">
-      <img
-        id="ig-icon"
-        src="assets/logo/instagram.png"
-        alt="インスタグラムのロゴ"
-      />
-    </a>
+
     <script>
+      AFRAME.registerComponent("link", {
+        schema: {
+          url: { type: "string" },
+        },
+        init: function () {
+          var data = this.data;
+          var el = this.el;
+
+          el.addEventListener("click", function () {
+            window.open(data.url, "_blank");
+          });
+        },
+      });
       document.addEventListener("DOMContentLoaded", function () {
         var video = document.querySelector("#video1");
         var marker = document.querySelector("a-marker");
-        var igLink = document.querySelector("#ig-link");
 
         marker.addEventListener("markerFound", function () {
           video.play().catch(function (error) {
             console.log("Error attempting to play video:", error);
           });
-          instagramLink.style.display = "block";
         });
 
         marker.addEventListener("markerLost", function () {
           video.pause();
-          instagramLink.style.display = "none";
         });
       });
     </script>
