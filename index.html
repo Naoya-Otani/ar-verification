@@ -1,24 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
-    <title>AR.js Video Example</title>
+    <title>たこ焼き屋</title>
     <script src="js/aframe.min.js"></script>
     <script src="js/ar.min.js"></script>
   </head>
   <body style="margin: 0; overflow: hidden">
     <a-scene embedded arjs="sourceType: webcam;">
       <a-assets>
-        <img src="/assets/logo/instagram.png" id="ig" />
+        <img
+          src="/assets/banner/ar_banner.png"
+          width="390px"
+          height="177px"
+          alt="外部リンクの画像"
+          id="links"
+        />
+        <video
+          src="/assets/video/takoyaki.mp4"
+          id="video1"
+          crossorigin="anonymous"
+          preload="auto"
+        ></video>
       </a-assets>
       <a-marker type="pattern" url="assets/marker/pattern-sample.patt">
         <a-image
-          src="#ig"
-          alt="instagram logo"
+          src="#links"
           position="0 1 0"
+          rotation="-90 0 0"
           height="1"
-          width="1"
-          navigate="url: https://www.instagram.com/"
+          width="2"
+          navigate="url: https://google.com"
         />
+        <a-video
+          src="#video1"
+          position="0 -2 0"
+          rotation="-90 0 0"
+          width="4"
+          height="2.25"
+        ></a-video>
       </a-marker>
       <a-entity camera="" cursor="rayOrigin: mouse"></a-entity>
     </a-scene>
@@ -27,7 +46,6 @@
       document.addEventListener("DOMContentLoaded", function () {
         var video = document.querySelector("#video1");
         var marker = document.querySelector("a-marker");
-        var ig = document.querySelector("#ig");
 
         marker.addEventListener("markerFound", function () {
           video.play().catch(function (error) {
