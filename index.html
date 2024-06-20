@@ -2,6 +2,7 @@
 <html lang="ja">
   <head>
     <title>たこ焼き屋</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <script src="js/aframe.min.js"></script>
     <script src="js/ar.min.js"></script>
   </head>
@@ -12,6 +13,7 @@
           src="/assets/banner/ar_banner.png"
           width="390px"
           height="177px"
+          loading="eager"
           alt="外部リンクの画像"
           id="links"
         />
@@ -19,7 +21,6 @@
           src="/assets/video/takoyaki.mp4"
           id="video1"
           crossorigin="anonymous"
-          preload="auto"
         ></video>
       </a-assets>
       <a-marker type="pattern" url="assets/marker/pattern-sample.patt">
