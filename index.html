@@ -2,12 +2,16 @@
 <html lang="ja">
   <head>
     <title>たこ焼き屋</title>
-    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" charset="utf-8" />
     <script src="js/aframe.min.js"></script>
     <script src="js/ar.min.js"></script>
   </head>
   <body style="margin: 0; overflow: hidden">
-    <a-scene embedded arjs="sourceType: webcam;">
+    <a-scene
+      embedded
+      arjs="sourceType: webcam;"
+      device-orientation-permission-ui="enabled: false"
+    >
       <a-assets>
         <img
           src="assets/banner/ar_banner.png"
@@ -16,6 +20,20 @@
           loading="eager"
           alt="外部リンクの画像"
           id="links"
+        />
+        <img
+          src="assets/banner/takoyaki.png"
+          alt="たこ焼きの画像"
+          id="takoyaki"
+          width="480px"
+          height="360px"
+        />
+        <img
+          src="assets/banner/text.png"
+          alt="店長のメッセージ"
+          id="message"
+          width="1170px"
+          height="1047px"
         />
         <video
           src="assets/video/takoyaki.mp4"
@@ -35,15 +53,29 @@
           width="2"
           navigate="url: https://google.com"
         />
+        <a-image
+          src="#takoyaki"
+          position="1 0 0"
+          rotation="-90 0 0"
+          height="1"
+          width="1"
+        />
+        <a-image
+          src="#message"
+          position="0 -1 1"
+          rotation="-90 0 0"
+          height="1"
+          width="1"
+        />
         <a-video
           src="#video1"
           position="0 -2 0"
-          rotation="0 0 0"
+          rotation="-45 0 0"
           width="4"
           height="2.25"
         ></a-video>
       </a-marker>
-      <a-entity camera="" cursor="rayOrigin: mouse"></a-entity>
+      <a-entity camera cursor="rayOrigin: mouse" look-controls></a-entity>
     </a-scene>
 
     <script>
